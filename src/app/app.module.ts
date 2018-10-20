@@ -1,18 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppComponent } from './app.component';
-import { CustomMaterialModule } from './custom-material.module';
+import { AppComponent } from "./app.component";
+import { CustomMaterialModule } from "./custom-material";
+import { ListtodosComponent } from "./components/listtodos/listtodos.component";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    CustomMaterialModule
-  ],
+  declarations: [AppComponent, ListtodosComponent],
+  imports: [BrowserModule, CustomMaterialModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
