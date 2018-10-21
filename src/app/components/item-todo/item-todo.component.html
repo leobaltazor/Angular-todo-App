@@ -1,5 +1,5 @@
-<form [formGroup]="todoItem">
-  <mat-checkbox formControlName="is_checked">
+<form [formGroup]="todoItem" class="d-flex">
+  <mat-checkbox formControlName="is_checked" class="text-wrap">
     {{todo.description}}
   </mat-checkbox>
   <button mat-icon-button (click)="onDeleteClick(todo)">
