@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Todo } from "src/app/todo";
 import { ServiceTodoService } from "../../service-todo.service";
@@ -16,7 +16,10 @@ export class ItemTodoComponent implements OnInit {
     description: new FormControl(""),
     is_checked: new FormControl("")
   });
-  constructor(private serviceTodoService: ServiceTodoService) {}
+  @Output()
+  todoStateChange: EventEmitter<Todo> = new EventEmitter();
+
+  constructor() {}
 
   ngOnInit() {
     this.todoItem.setValue({
@@ -25,15 +28,14 @@ export class ItemTodoComponent implements OnInit {
       is_checked: this.todo.is_checked
     });
     this.todoItem.valueChanges.subscribe(value => {
-      this.onCheckClick(value.id, value);
+      this.onCheckClick(value);
     });
   }
-  onDeleteClick(item: Todo): void {
-    this.serviceTodoService.deleteTodo("todos", item.id);
+  onDeleteClick(item): void {
+    item = { ...item, payload: "DELETE" };
+    this.todoStateChange.emit(item);
   }
-  onCheckClick(item, payload): void {
-    this.serviceTodoService
-      .doneTodo("todos", item, payload)
-      .subscribe(res => console.log(res));
+  onCheckClick(item): void {
+    this.todoStateChange.emit(item);
   }
 }

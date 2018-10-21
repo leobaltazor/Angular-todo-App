@@ -1,6 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Todo } from "src/app/todo";
-import { ServiceTodoService } from "../../service-todo.service";
 
 @Component({
   selector: "app-listtodos",
@@ -8,12 +7,15 @@ import { ServiceTodoService } from "../../service-todo.service";
   styleUrls: ["./listtodos.component.css"]
 })
 export class ListtodosComponent implements OnInit {
+  @Input()
   todos: Todo[];
-  constructor(private serviceTodoService: ServiceTodoService) {}
+  @Output()
+  todoStateChange: EventEmitter<Todo> = new EventEmitter();
+  constructor() {}
 
-  ngOnInit() {
-    this.serviceTodoService
-      .getTodo("todos")
-      .subscribe((res: Todo[]) => (this.todos = res));
+  ngOnInit() {}
+
+  onTodoStateChange(e) {
+    this.todoStateChange.emit(e);
   }
 }
