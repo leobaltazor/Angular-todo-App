@@ -1,6 +1,13 @@
 .example-full-width {
   width: 100%;
 }
+
 .example-full-width-form {
-display: flex;
+  /* display: flex; */
+  background-color: white;
+}
+
+.buttoninput {
+  height: 45px;
+  margin-left: 0.5rem;
 }

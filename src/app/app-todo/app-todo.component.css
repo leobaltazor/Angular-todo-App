@@ -8,8 +8,10 @@
 
 .example-form {
   min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+  /* max-width: 500px; */
+  /* width: 100%; */
+  position: sticky;
+  top: 4rem;
+  z-index: 1;
+  background-color: white;
 }
-
-
