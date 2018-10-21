@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ListtodosComponent } from "./listtodos.component";
+import { ListtodosComponent } from "./list-todos.component";
 
 describe("ListtodosComponent", () => {
   let component: ListtodosComponent;

@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Todo } from "src/app/todo";
+import { ServiceTodoService } from "../../service-todo.service";
 
 @Component({
   selector: "app-listtodos",
@@ -6,17 +8,12 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./listtodos.component.css"]
 })
 export class ListtodosComponent implements OnInit {
-  todos: [] = [
-    {
-      description: "first",
-      is_checked: true
-    },
-    {
-      description: "second",
-      is_checked: false
-    }
-  ];
-  constructor() {}
+  todos: Todo[];
+  constructor(private serviceTodoService: ServiceTodoService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.serviceTodoService
+      .getTodo("todos")
+      .subscribe((res: Todo[]) => (this.todos = res));
+  }
 }
