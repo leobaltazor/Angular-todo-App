@@ -1,0 +1,6 @@
+.text-wrap {
+  white-space: normal !important;
+}
+form span.mat-checkbox-label {
+  white-space: normal;
+}
