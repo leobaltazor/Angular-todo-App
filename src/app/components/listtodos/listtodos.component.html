@@ -1,6 +1,6 @@
-<mat-card role="listitem" *ngFor="let todo of todos">
-  <mat-checkbox [checked]="todo.is_checked">{{todo.description}}</mat-checkbox>
-  <button mat-icon-button>
-    <mat-icon>delete</mat-icon>
-  </button>
+<mat-card *ngFor="let todo of todos">
+  <app-item-todo
+  [todo]="todo"
+  (todoStateChange)="onTodoStateChange($event)"
+  ></app-item-todo>
 </mat-card>
