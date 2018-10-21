@@ -1,0 +1,144 @@
+{
+    "workbench.statusBar.feedback.visible": false,
+    "window.menuBarVisibility": "toggle",
+    "editor.minimap.enabled": false,
+    "editor.tabSize": 4,
+    "workbench.editor.tabSizing": "shrink",
+    "editor.detectIndentation": true,
+    "editor.insertSpaces": true,
+    "editor.folding": false,
+    "editor.glyphMargin": false,
+    "editor.smoothScrolling": true,
+    "files.autoSave": "afterDelay",
+    "editor.renderWhitespace": "all",
+    "git.autofetch": true,
+    "workbench.colorCustomizations": {
+        "editor.lineHighlightBackground": "#00000050"
+    },
+    "workbench.colorTheme": "Andromeda",
+    "git.confirmSync": false,
+    "window.zoomLevel": 0,
+    // Enable per-language
+    "[php]": {
+        "editor.formatOnSave": true
+    },
+    //сопоставление типов файлов и языков
+    "files.associations": {
+        "*.handlebars": "html"
+    },
+    "material-icon-theme.activeIconPack": "react_redux",
+    "material-icon-theme.folders.theme": "specific",
+    "terminal.integrated.fontFamily": "Consolas, monospace",
+    "material-icon-theme.opacity": 1,
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.fontLigatures": true,
+    "prettier.tabWidth": 4,
+    "cSpell.language": "en,ru",
+    "sync.gist": "1a644ec86c1ef0901af5c0b0ebbfa191",
+    "sync.host": "",
+    "sync.pathPrefix": "",
+    "sync.quietSync": true,
+    "sync.askGistName": false,
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true,
+    "sync.autoDownload": true,
+    "sync.autoUpload": true,
+    "sync.lastUpload": "2018-08-23T06:47:19.245Z",
+    "sync.lastDownload": "2018-08-26T20:56:00.207Z",
+    "sync.forceDownload": false,
+    "todo-tree.flat": true,
+    "todo-tree.highlight": "tag",
+    "bracketPairColorizer.scopeLineCSS": [
+        "borderStyle : solid",
+        "borderWidth : 1px",
+        "borderColor : {color}; opacity: 0.5",
+        "backgroundColor : {color}; opacity: 0.1"
+    ],
+    "editor.fontFamily": "Fira Code",
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "gitlens.gitExplorer.files.layout": "auto",
+    "terminal.integrated.rendererType": "dom",
+    "gitlens.hovers.enabled": false,
+    "html.format.wrapLineLength": 80,
+    "npm.enableScriptExplorer": true,
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/jspm_packages": true,
+        "**/bower_components": true
+    },
+    "diffEditor.ignoreTrimWhitespace": true,
+    "tinypng.apiKey": "3s9Yy3ifUC0Wucs7Sz61pEH1Yuge8vXW",
+    "files.autoSaveDelay": 1000,
+    "cSpell.userWords": ["Mautic", "Дизлайкнул", "Фейсбук"],
+    "breadcrumbs.enabled": true,
+    "todo-tree.defaultHighlight": {
+        "foreground": "green",
+        "type": "tag"
+    },
+    "todo-tree.customHighlight": {
+        "TODO": {},
+        "FIXME": {}
+    },
+    "editor.minimap.maxColumn": 80,
+    "workbench.startupEditor": "newUntitledFile",
+    "cSpell.enabledLanguageIds": [
+        "asciidoc",
+        "c",
+        "cpp",
+        "csharp",
+        "css",
+        "go",
+        "handlebars",
+        "html",
+        "jade",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "latex",
+        "less",
+        "markdown",
+        "php",
+        "plaintext",
+        "pub",
+        "python",
+        "restructuredtext",
+        "rust",
+        "scss",
+        "text",
+        "typescript",
+        "typescriptreact",
+        "yml"
+    ],
+    "editor.suggest.localityBonus": true,
+    "editor.fontSize": 14,
+    "html.format.endWithNewline": true,
+    "beautify.language": {
+        "js": {
+            "type": [
+                "javascript",
+                "json",
+                "jsonc"
+            ],
+            "filename": [
+                ".jshintrc",
+                ".jsbeautifyrc"
+            ]
+        },
+        "css": [
+            "css",
+            "scss"
+        ],
+        "html": [
+            "htm",
+            "html",
+            "blade"
+        ]
+    },
+    "html.format.indentHandlebars": true,
+    "html.format.indentInnerHtml": true,
+    "editor.fontWeight": "300",
+    "editor.tabCompletion": "on",
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" // Light
+}

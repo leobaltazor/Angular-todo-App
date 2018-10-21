@@ -4,10 +4,24 @@ import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { CustomMaterialModule } from "./custom-material";
 import { ListtodosComponent } from "./components/listtodos/listtodos.component";
+import { HttpClientModule } from "@angular/common/http";
+import { InputTodoComponent } from "./components/input-todo/input-todo.component";
+import { ItemTodoComponent } from "./components/item-todo/item-todo.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-  declarations: [AppComponent, ListtodosComponent],
-  imports: [BrowserModule, CustomMaterialModule],
+  declarations: [
+    AppComponent,
+    ListtodosComponent,
+    InputTodoComponent,
+    ItemTodoComponent
+  ],
+  imports: [
+    BrowserModule,
+    CustomMaterialModule,
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
