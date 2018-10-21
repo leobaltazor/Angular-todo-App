@@ -1,5 +1,6 @@
-@import '~bootstrap/scss/bootstrap-reboot';
-@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap-reboot';
+// @import '~bootstrap/scss/bootstrap-grid';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 .example-icon {
@@ -8,6 +9,9 @@
 
 .example-spacer {
   flex: 1 1 auto;
+}
+label {
+  margin-bottom: 0;
 }
 
 .mat-checkbox-label {
@@ -27,6 +31,7 @@
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1;
 }
 
 .example-footer {
