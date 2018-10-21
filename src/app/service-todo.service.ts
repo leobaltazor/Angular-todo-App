@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Todo } from "./todo";
 import { Observable } from "rxjs";
 
@@ -8,18 +8,24 @@ import { Observable } from "rxjs";
 })
 export class ServiceTodoService {
   private urlServe = "http://localhost:3000/";
+  private httpOptions = {
+    headers: new HttpHeaders({ "Content-Type": "application/json" })
+  };
   constructor(private http: HttpClient) {}
 
   getTodo(essence: string): Observable<Todo[]> {
-    return this.http.get<Todo[]>(this.urlServe + essence);
+    return this.http.get<Todo[]>(this.urlServe + essence, this.httpOptions);
   }
   doneTodo(essence: string, elementId: number, payload): Observable<any> {
     return this.http.patch<any>(
       this.urlServe + essence + "/" + elementId,
-      payload
+      payload, this.httpOptions
     );
   }
-  deleteTodo(essence: string, elementId: number) {
-    return this.http.delete(this.urlServe + essence + "/" + elementId)
+  deleteTodo(essence: string, elementId: number): Observable<any> {
+    return this.http.delete<any>(this.urlServe + essence + "/" + elementId, this.httpOptions);
+  }
+  addTodo(essence: string, item: Todo): Observable<any> {
+    return this.http.post<any>(this.urlServe + essence, item, this.httpOptions);
   }
 }

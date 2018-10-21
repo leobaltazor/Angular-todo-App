@@ -1,5 +1,11 @@
-<!-- <form>
+<form [formGroup]="todoItem" class="example-full-width-form" (ngSubmit)="onSubmit()">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="I am going to.. ">
+    <input matInput placeholder="I am going to.. " formControlName="description">
   </mat-form-field>
-</form> -->
+  <button mat-raised-button>
+    <mat-icon>add</mat-icon>
+  </button>
+  <button mat-raised-button type="button">
+    <mat-icon>delete</mat-icon>
+  </button>
+</form>
