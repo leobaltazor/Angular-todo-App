@@ -1,0 +1,8 @@
+<form [formGroup]="todoItem">
+  <mat-checkbox formControlName="is_checked">
+    {{todo.description}}
+  </mat-checkbox>
+  <button mat-icon-button (click)="onDeleteClick(todo)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</form>

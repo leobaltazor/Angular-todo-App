@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Todo } from "src/app/todo";
 
 @Component({
   selector: "app-listtodos",
@@ -6,17 +7,15 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./listtodos.component.css"]
 })
 export class ListtodosComponent implements OnInit {
-  todos: [] = [
-    {
-      description: "first",
-      is_checked: true
-    },
-    {
-      description: "second",
-      is_checked: false
-    }
-  ];
+  @Input()
+  todos: Todo[];
+  @Output()
+  todoStateChange: EventEmitter<Todo> = new EventEmitter();
   constructor() {}
 
   ngOnInit() {}
+
+  onTodoStateChange(e) {
+    this.todoStateChange.emit(e);
+  }
 }
