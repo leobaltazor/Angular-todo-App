@@ -2,53 +2,18 @@
   "todos": [
     {
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae explicabo corporis hic mollitia?",
-      "is_checked": false,
+      "is_checked": true,
       "id": 2
     },
     {
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae explicabo corporis hic mollitia?",
-      "is_checked": false,
+      "is_checked": true,
       "id": 4
     },
     {
-      "description": "a",
+      "description": "test",
       "is_checked": false,
       "id": 5
-    },
-    {
-      "description": "as",
-      "is_checked": false,
-      "id": 6
-    },
-    {
-      "description": "as",
-      "is_checked": false,
-      "id": 7
-    },
-    {
-      "description": "as",
-      "is_checked": false,
-      "id": 8
-    },
-    {
-      "description": "as",
-      "is_checked": false,
-      "id": 9
-    },
-    {
-      "description": "as",
-      "is_checked": false,
-      "id": 10
-    },
-    {
-      "description": "as",
-      "is_checked": false,
-      "id": 11
-    },
-    {
-      "description": "as",
-      "is_checked": false,
-      "id": 12
     }
   ]
 }
