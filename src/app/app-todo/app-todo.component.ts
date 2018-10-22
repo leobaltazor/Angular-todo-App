@@ -11,8 +11,28 @@ export class AppTodoComponent implements OnInit {
   todos: Todo[];
   selectedTodo: Todo[];
   newAddedItem;
+  initialTodo: Todo[];
+  lengthTodos = 0;
 
   constructor(private serviceTodoService: ServiceTodoService) {}
+
+  onFilter(filter): void {
+    switch (filter) {
+      case "DONE":
+        this.todos = this.initialTodo.filter((e, i, a) => {
+          return e.is_checked === true;
+        });
+        break;
+      case "ACTIVE":
+        this.todos = this.initialTodo.filter((e, i, a) => {
+          return e.is_checked === false;
+        });
+        break;
+      default:
+        this.todos = this.initialTodo;
+        break;
+    }
+  }
 
   onTodoStateChange(e): void {
     const { payload, ...todo } = e;
@@ -24,12 +44,12 @@ export class AppTodoComponent implements OnInit {
         this.onCheck(e.id, todo);
         break;
     }
-    console.log(payload);
   }
 
   onDelete(item: Todo): void {
     this.serviceTodoService.deleteTodo("todos", item.id).subscribe(res => {
       this.todos = this.todos.filter(h => h.id !== item.id);
+      this.initialTodo = this.initialTodo.filter(h => h.id !== item.id);
       console.log("Deleted", item);
     });
   }
@@ -37,7 +57,12 @@ export class AppTodoComponent implements OnInit {
   onCheck(itemId, payload): void {
     this.serviceTodoService
       .doneTodo("todos", itemId, payload)
-      .subscribe(res => console.log(res));
+      .subscribe(res => {
+        console.log(res);
+        this.initialTodo = this.initialTodo.map((e, i, a) => {
+          return e.id === res.id ? res : e;
+        });
+      });
   }
 
   onNewAddedItem(e) {
@@ -47,9 +72,10 @@ export class AppTodoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.serviceTodoService
-      .getTodo("todos")
-      .subscribe((res: Todo[]) => (this.todos = res));
+    this.serviceTodoService.getTodo("todos").subscribe((res: Todo[]) => {
+      this.initialTodo = res;
+      this.todos = res;
+    });
   }
   onSubmit(): void {}
 }
