@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Todo } from "src/app/todo";
-import { ServiceTodoService } from "../../service-todo.service";
 
 @Component({
   selector: "app-item-todo",

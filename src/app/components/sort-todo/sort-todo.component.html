@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col">
+    <h3 class="font-weight-bold">
+      Todo list
+    </h3>
+  </div>
+  <div class="col-auto">
+    <mat-chip-list>
+      <mat-chip>Dispaying {{length}} todos</mat-chip>
+    </mat-chip-list>
+  </div>
+  <div class="col-auto">
+    <button mat-icon-button [matMenuTriggerFor]="filter_list">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+    <mat-menu #filter_list="matMenu">
+      <button mat-menu-item (click)="onClick('ALL')">
+        <mat-icon>list</mat-icon>
+        <span>All</span>
+      </button>
+      <button mat-menu-item (click)="onClick('DONE')">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+      </button>
+      <button mat-menu-item (click)="onClick('ACTIVE')">
+        <mat-icon>crop_square</mat-icon>
+        <span>Active</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>

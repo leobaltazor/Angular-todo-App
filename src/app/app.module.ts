@@ -9,6 +9,7 @@ import { InputTodoComponent } from "./components/input-todo/input-todo.component
 import { ItemTodoComponent } from "./components/item-todo/item-todo.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AppTodoComponent } from "./app-todo/app-todo.component";
+import { SortTodoComponent } from './components/sort-todo/sort-todo.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AppTodoComponent } from "./app-todo/app-todo.component";
     ListtodosComponent,
     InputTodoComponent,
     ItemTodoComponent,
-    AppTodoComponent
+    AppTodoComponent,
+    SortTodoComponent
   ],
   imports: [
     BrowserModule,
