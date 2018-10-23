@@ -8,9 +8,9 @@ import { ServiceTodoService } from "../service-todo.service";
   styleUrls: ["./app-todo.component.css"]
 })
 export class AppTodoComponent implements OnInit {
-  todos: Todo[];
+  todos: Todo[] = [];
   selectedTodo: Todo[];
-  newAddedItem;
+  newAddedItem: Todo;
   initialTodo: Todo[];
   lengthTodos = 0;
 
