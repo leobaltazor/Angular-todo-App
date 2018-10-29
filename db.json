@@ -2,7 +2,7 @@
   "todos": [
     {
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae explicabo corporis hic mollitia?",
-      "is_checked": false,
+      "is_checked": true,
       "id": 2
     },
     {
