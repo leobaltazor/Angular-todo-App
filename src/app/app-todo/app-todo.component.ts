@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Todo } from "../todo";
 import { ServiceTodoService } from "../service-todo.service";
+import { Store } from "@ngrx/store";
+import { TodoList } from "../store/models/todo-list.intarface";
+import { todoActionTypes } from "../store/constants/todo.constants";
 
 @Component({
   selector: "app-todo",
@@ -14,7 +17,10 @@ export class AppTodoComponent implements OnInit {
   initialTodo: Todo[];
   lengthTodos = 0;
 
-  constructor(private serviceTodoService: ServiceTodoService) {}
+  constructor(
+    private serviceTodoService: ServiceTodoService,
+    private store: Store<TodoList>
+  ) {}
 
   onFilter(filter): void {
     switch (filter) {
@@ -65,17 +71,22 @@ export class AppTodoComponent implements OnInit {
       });
   }
 
-  onNewAddedItem(e) {
-    this.serviceTodoService.addTodo("todos", e as Todo).subscribe(res => {
-      this.todos.push(res);
-    });
+  ngOnInit() {
+    this.store
+      .select("todo")
+      .subscribe((value: TodoList) => {
+        this.todos = value.todoList;
+        this.initialTodo = value.todoList;
+      });
+    this.getTodo();
   }
 
-  ngOnInit() {
+  getTodo(): void {
     this.serviceTodoService.getTodo("todos").subscribe((res: Todo[]) => {
-      this.initialTodo = res;
-      this.todos = res;
+      this.store.dispatch({
+        type: todoActionTypes.LOAD,
+        payload: res
+      });
     });
   }
-  onSubmit(): void {}
 }

@@ -6,7 +6,7 @@
   </mat-form-field>
 </div>
 <div class="col-auto">
-  <button mat-raised-button class="buttoninput">
+  <button mat-raised-button class="buttoninput" [disabled]="todoItem.invalid">
     <mat-icon>add</mat-icon>
   </button>
   <button mat-raised-button type="button" class="buttoninput">
