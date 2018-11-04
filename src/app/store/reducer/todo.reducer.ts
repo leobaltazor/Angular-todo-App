@@ -1,29 +1,63 @@
-import { TodoList } from "../models/todo-list.intarface";
-import { TodoActionUnion } from "../actions/todo.actions";
-import { todoActionTypes } from "../constants/todo.constants";
+import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
+import { Todo } from "../models/todo.model";
+import { TodoActionTypes } from "../constants/todo.constants";
+import { TodoActions } from "../actions/todo.actions";
+import { AppStore } from "../models/app-store.interface";
 
-const initialState: TodoList = {
-  todoList: []
-};
+export interface State extends EntityState<Todo> {
+  // additional entities state properties
+}
 
-export function todoReducer(
-  state: TodoList = initialState,
-  action: TodoActionUnion
-) {
+export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
+
+export const initialState: State = adapter.getInitialState({
+
+});
+
+export function reducer(state = initialState, action: TodoActions): State {
   switch (action.type) {
-    case todoActionTypes.LOAD:
-      return {
-        ...state,
-        todoList: action.payload
-      };
+    case TodoActionTypes.AddTodo: {
+      return adapter.addOne(action.payload.todo, state);
+    }
 
-    case todoActionTypes.ADD:
-      return {
-        ...state,
-        todoList: [...state.todoList, action.payload]
-      };
+    case TodoActionTypes.UpsertTodo: {
+      return adapter.upsertOne(action.payload.todo, state);
+    }
 
-    default:
+    case TodoActionTypes.AddTodos: {
+      return adapter.addMany(action.payload.todos, state);
+    }
+
+    case TodoActionTypes.UpsertTodos: {
+      return adapter.upsertMany(action.payload.todos, state);
+    }
+
+    case TodoActionTypes.UpdateTodo: {
+      return adapter.updateOne(action.payload.todo, state);
+    }
+
+    case TodoActionTypes.UpdateTodos: {
+      return adapter.updateMany(action.payload.todos, state);
+    }
+
+    case TodoActionTypes.DeleteTodo: {
+      return adapter.removeOne(action.payload.id, state);
+    }
+
+    case TodoActionTypes.DeleteTodos: {
+      return adapter.removeMany(action.payload.ids, state);
+    }
+
+    case TodoActionTypes.LoadTodos: {
+      return adapter.addAll(action.payload.todos, state);
+    }
+
+    case TodoActionTypes.ClearTodos: {
+      return adapter.removeAll(state);
+    }
+
+    default: {
       return state;
+    }
   }
 }

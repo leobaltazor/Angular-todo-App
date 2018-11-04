@@ -1,9 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { Todo } from "../todo";
 import { ServiceTodoService } from "../service-todo.service";
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 import { TodoList } from "../store/models/todo-list.intarface";
-import { todoActionTypes } from "../store/constants/todo.constants";
+import { TodoActionTypes } from "../store/constants/todo.constants";
+import { AppStore } from "../store/models/app-store.interface";
+import * as selectorsTodo from "../store/selectors/todo.selectors";
+import { Todo } from "../store/models/todo.model";
+import * as todoActions from "../store/actions/todo.actions";
 
 @Component({
   selector: "app-todo",
@@ -19,19 +22,19 @@ export class AppTodoComponent implements OnInit {
 
   constructor(
     private serviceTodoService: ServiceTodoService,
-    private store: Store<TodoList>
+    private store: Store<Todo>
   ) {}
 
   onFilter(filter): void {
     switch (filter) {
       case "DONE":
         this.todos = this.initialTodo.filter((e, i, a) => {
-          return e.is_checked === true;
+          return e.isChecked === true;
         });
         break;
       case "ACTIVE":
         this.todos = this.initialTodo.filter((e, i, a) => {
-          return e.is_checked === false;
+          return e.isChecked === false;
         });
         break;
       default:
@@ -53,10 +56,8 @@ export class AppTodoComponent implements OnInit {
   }
 
   onDelete(item: Todo): void {
-    this.serviceTodoService.deleteTodo("todos", item.id).subscribe(res => {
-      this.todos = this.todos.filter(h => h.id !== item.id);
-      this.initialTodo = this.initialTodo.filter(h => h.id !== item.id);
-      console.log("Deleted", item);
+    this.serviceTodoService.deleteTodo("todos", +item.id).subscribe(res => {
+      this.store.dispatch(new todoActions.DeleteTodo({id: item.id}));
     });
   }
 
@@ -64,29 +65,26 @@ export class AppTodoComponent implements OnInit {
     this.serviceTodoService
       .doneTodo("todos", itemId, payload)
       .subscribe(res => {
-        console.log(res);
-        this.initialTodo = this.initialTodo.map((e, i, a) => {
-          return e.id === res.id ? res : e;
-        });
+        this.store.dispatch(new todoActions.UpsertTodo({ todo: res }));
       });
   }
 
   ngOnInit() {
     this.store
-      .select("todo")
-      .subscribe((value: TodoList) => {
-        this.todos = value.todoList;
-        this.initialTodo = value.todoList;
+      .pipe(select(selectorsTodo.selectAll))
+      .subscribe((value: Todo[]) => {
+        this.todos = value;
+        this.initialTodo = value;
       });
     this.getTodo();
   }
 
   getTodo(): void {
     this.serviceTodoService.getTodo("todos").subscribe((res: Todo[]) => {
-      this.store.dispatch({
-        type: todoActionTypes.LOAD,
-        payload: res
-      });
+      const tes = {
+        todos: res
+      };
+      this.store.dispatch(new todoActions.LoadTodos(tes));
     });
   }
 }

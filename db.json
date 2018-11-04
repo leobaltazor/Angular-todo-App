@@ -1,19 +1,24 @@
 {
   "todos": [
     {
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae explicabo corporis hic mollitia?",
-      "is_checked": true,
-      "id": 2
-    },
-    {
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae explicabo corporis hic mollitia?",
-      "is_checked": false,
-      "id": 4
-    },
-    {
       "description": "test",
-      "is_checked": true,
+      "isChecked": false,
       "id": 5
+    },
+    {
+      "description": "test1",
+      "isChecked": null,
+      "id": 6
+    },
+    {
+      "description": "test2",
+      "isChecked": null,
+      "id": 7
+    },
+    {
+      "description": "test3",
+      "isChecked": null,
+      "id": 8
     }
   ]
 }
