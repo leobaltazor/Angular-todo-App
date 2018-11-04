@@ -1,17 +1,17 @@
 <form [formGroup]="todoItem" class="example-full-width-form" (ngSubmit)="onSubmit()">
   <div class="form-row justify-content-center">
-<div class="col">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="I am going to.. " formControlName="description">
-  </mat-form-field>
-</div>
-<div class="col-auto">
-  <button mat-raised-button class="buttoninput" [disabled]="todoItem.invalid">
-    <mat-icon>add</mat-icon>
-  </button>
-  <button mat-raised-button type="button" class="buttoninput">
-    <mat-icon>delete</mat-icon>
-  </button>
-</div>
+    <div class="col">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="I am going to.. " formControlName="description">
+      </mat-form-field>
+    </div>
+    <div class="col-auto">
+      <button mat-raised-button class="buttoninput" [disabled]="todoItem.invalid">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-raised-button type="button" disabled class="buttoninput">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </div>
 </form>
