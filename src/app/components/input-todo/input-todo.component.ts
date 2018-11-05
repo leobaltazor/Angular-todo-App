@@ -1,10 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { debounceTime, filter } from "rxjs/operators";
+import { debounceTime} from "rxjs/operators";
 import { Store } from "@ngrx/store";
 import { TodoList } from "src/app/store/models/todo-list.intarface";
 import { ServiceTodoService } from "../../service-todo.service";
-import { TodoActionTypes } from "src/app/store/constants/todo.constants";
 import { Todo } from "src/app/store/models/todo.model";
 import { AddTodo } from "src/app/store/actions/todo.actions";
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ServiceTodoService } from "../service-todo.service";
 import { Store, select } from "@ngrx/store";
 import * as selectorsTodo from "../store/selectors/todo.selectors";
-import { Todo } from "../store/models/todo.model";
+import { Todo } from "../store/models";
 import TodoActions from "../store/actions";
 
 @Component({
