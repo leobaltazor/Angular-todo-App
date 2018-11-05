@@ -3,7 +3,9 @@ import { ServiceTodoService } from "../service-todo.service";
 import { Store, select } from "@ngrx/store";
 import * as selectorsTodo from "../store/selectors/todo.selectors";
 import { Todo } from "../store/models";
-import TodoActions from "../store/actions";
+import * as fromTodosActions from "../store/actions/todo.actions";
+import { State } from "../store/reducer";
+import * as fromTodosReducer from "../store/reducer/todo.reducer";
 
 @Component({
   selector: "app-todo",
@@ -18,7 +20,7 @@ export class AppTodoComponent implements OnInit {
 
   constructor(
     private serviceTodoService: ServiceTodoService,
-    private store: Store<Todo>
+    private store: Store<State>
   ) {}
 
   onFilter(filter): void {
@@ -54,7 +56,7 @@ export class AppTodoComponent implements OnInit {
   onDelete(item: Todo): void {
     this.serviceTodoService.deleteTodo("todos", +item.id).subscribe(_ => {
       const { id } = item;
-      this.store.dispatch(new TodoActions.DeleteTodo({ id }));
+      this.store.dispatch(new fromTodosActions.DeleteTodo({ id }));
     });
   }
 
@@ -62,13 +64,13 @@ export class AppTodoComponent implements OnInit {
     this.serviceTodoService
       .doneTodo("todos", itemId, payload)
       .subscribe(todo => {
-        this.store.dispatch(new TodoActions.UpsertTodo({ todo }));
+        this.store.dispatch(new fromTodosActions.UpsertTodo({ todo }));
       });
   }
 
   ngOnInit() {
     this.store
-      .pipe(select(selectorsTodo.selectAllTodos))
+      .pipe(select(selectorsTodo.selectTodoAll))
       .subscribe((value: Todo[]) => {
         this.todos = value;
         this.initialTodo = value;
@@ -78,7 +80,7 @@ export class AppTodoComponent implements OnInit {
 
   getTodo(): void {
     this.serviceTodoService.getTodo("todos").subscribe((todos: Todo[]) => {
-      this.store.dispatch(new TodoActions.LoadTodos({ todos }));
+      this.store.dispatch(new fromTodosActions.LoadTodos({ todos }));
     });
   }
 }

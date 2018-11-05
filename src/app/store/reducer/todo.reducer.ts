@@ -52,11 +52,7 @@ export function reducerTodo(state = initialState, action: TodoActions): State {
     }
 
     case TodoActionTypes.ClearTodos: {
-      return adapterTodo.removeAll({
-        ...state,
-        selectedTodo: null,
-        selectedFolder: null
-      });
+      return adapterTodo.removeAll(state);
     }
 
     default: {
