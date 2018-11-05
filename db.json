@@ -2,22 +2,22 @@
   "todos": [
     {
       "description": "test",
-      "isChecked": false,
+      "isChecked": true,
       "id": 5
     },
     {
       "description": "test1",
-      "isChecked": null,
+      "isChecked": false,
       "id": 6
     },
     {
       "description": "test2",
-      "isChecked": null,
+      "isChecked": false,
       "id": 7
     },
     {
       "description": "test3",
-      "isChecked": null,
+      "isChecked": false,
       "id": 8
     }
   ]

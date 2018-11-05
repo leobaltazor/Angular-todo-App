@@ -1,59 +1,65 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
+import { EntityState } from "@ngrx/entity";
 import { Todo } from "../models/todo.model";
 import { TodoActionTypes } from "../constants/todo.constants";
 import { TodoActions } from "../actions/todo.actions";
 import { AppStore } from "../models/app-store.interface";
+import { adapterTodo } from "../adapters";
 
 export interface State extends EntityState<Todo> {
   // additional entities state properties
+  selectedTodo: number | null;
+  selectedFolder: number | null;
 }
 
-export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
-
-export const initialState: State = adapter.getInitialState({
-
+export const initialState: State = adapterTodo.getInitialState({
+  selectedTodo: null,
+  selectedFolder: null
 });
 
 export function reducer(state = initialState, action: TodoActions): State {
   switch (action.type) {
     case TodoActionTypes.AddTodo: {
-      return adapter.addOne(action.payload.todo, state);
+      return adapterTodo.addOne(action.payload.todo, state);
     }
 
     case TodoActionTypes.UpsertTodo: {
-      return adapter.upsertOne(action.payload.todo, state);
+      return adapterTodo.upsertOne(action.payload.todo, state);
     }
 
     case TodoActionTypes.AddTodos: {
-      return adapter.addMany(action.payload.todos, state);
+      return adapterTodo.addMany(action.payload.todos, state);
     }
 
     case TodoActionTypes.UpsertTodos: {
-      return adapter.upsertMany(action.payload.todos, state);
+      return adapterTodo.upsertMany(action.payload.todos, state);
     }
 
     case TodoActionTypes.UpdateTodo: {
-      return adapter.updateOne(action.payload.todo, state);
+      return adapterTodo.updateOne(action.payload.todo, state);
     }
 
     case TodoActionTypes.UpdateTodos: {
-      return adapter.updateMany(action.payload.todos, state);
+      return adapterTodo.updateMany(action.payload.todos, state);
     }
 
     case TodoActionTypes.DeleteTodo: {
-      return adapter.removeOne(action.payload.id, state);
+      return adapterTodo.removeOne(action.payload.id, state);
     }
 
     case TodoActionTypes.DeleteTodos: {
-      return adapter.removeMany(action.payload.ids, state);
+      return adapterTodo.removeMany(action.payload.ids, state);
     }
 
     case TodoActionTypes.LoadTodos: {
-      return adapter.addAll(action.payload.todos, state);
+      return adapterTodo.addAll(action.payload.todos, state);
     }
 
     case TodoActionTypes.ClearTodos: {
-      return adapter.removeAll(state);
+      return adapterTodo.removeAll({
+        ...state,
+        selectedTodo: null,
+        selectedFolder: null
+      });
     }
 
     default: {

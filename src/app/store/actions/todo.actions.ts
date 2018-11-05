@@ -1,8 +1,7 @@
 import { Action } from "@ngrx/store";
 import { Update } from "@ngrx/entity";
-import { TodoActionTypes } from "../constants/todo.constants";
-import { Todo } from "../models/todo.model";
-
+import { TodoActionTypes } from "../constants";
+import { Todo } from "../models";
 export class LoadTodos implements Action {
   readonly type = TodoActionTypes.LoadTodos;
 

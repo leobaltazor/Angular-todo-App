@@ -6,7 +6,7 @@ import { TodoActionTypes } from "../store/constants/todo.constants";
 import { AppStore } from "../store/models/app-store.interface";
 import * as selectorsTodo from "../store/selectors/todo.selectors";
 import { Todo } from "../store/models/todo.model";
-import * as todoActions from "../store/actions/todo.actions";
+import TodoActions from "../store/actions";
 
 @Component({
   selector: "app-todo",
@@ -57,7 +57,7 @@ export class AppTodoComponent implements OnInit {
 
   onDelete(item: Todo): void {
     this.serviceTodoService.deleteTodo("todos", +item.id).subscribe(res => {
-      this.store.dispatch(new todoActions.DeleteTodo({id: item.id}));
+      this.store.dispatch(new TodoActions.DeleteTodo({ id: item.id }));
     });
   }
 
@@ -65,13 +65,13 @@ export class AppTodoComponent implements OnInit {
     this.serviceTodoService
       .doneTodo("todos", itemId, payload)
       .subscribe(res => {
-        this.store.dispatch(new todoActions.UpsertTodo({ todo: res }));
+        this.store.dispatch(new TodoActions.UpsertTodo({ todo: res }));
       });
   }
 
   ngOnInit() {
     this.store
-      .pipe(select(selectorsTodo.selectAll))
+      .pipe(select(selectorsTodo.selectAllTodos))
       .subscribe((value: Todo[]) => {
         this.todos = value;
         this.initialTodo = value;
@@ -81,10 +81,7 @@ export class AppTodoComponent implements OnInit {
 
   getTodo(): void {
     this.serviceTodoService.getTodo("todos").subscribe((res: Todo[]) => {
-      const tes = {
-        todos: res
-      };
-      this.store.dispatch(new todoActions.LoadTodos(tes));
+      this.store.dispatch(new TodoActions.LoadTodos({ todos: res }));
     });
   }
 }
