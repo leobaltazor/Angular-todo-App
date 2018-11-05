@@ -52,16 +52,17 @@ export class AppTodoComponent implements OnInit {
   }
 
   onDelete(item: Todo): void {
-    this.serviceTodoService.deleteTodo("todos", +item.id).subscribe(res => {
-      this.store.dispatch(new TodoActions.DeleteTodo({ id: item.id }));
+    this.serviceTodoService.deleteTodo("todos", +item.id).subscribe(_ => {
+      const { id } = item;
+      this.store.dispatch(new TodoActions.DeleteTodo({ id }));
     });
   }
 
   onCheck(itemId, payload): void {
     this.serviceTodoService
       .doneTodo("todos", itemId, payload)
-      .subscribe(res => {
-        this.store.dispatch(new TodoActions.UpsertTodo({ todo: res }));
+      .subscribe(todo => {
+        this.store.dispatch(new TodoActions.UpsertTodo({ todo }));
       });
   }
 
@@ -76,8 +77,8 @@ export class AppTodoComponent implements OnInit {
   }
 
   getTodo(): void {
-    this.serviceTodoService.getTodo("todos").subscribe((res: Todo[]) => {
-      this.store.dispatch(new TodoActions.LoadTodos({ todos: res }));
+    this.serviceTodoService.getTodo("todos").subscribe((todos: Todo[]) => {
+      this.store.dispatch(new TodoActions.LoadTodos({ todos }));
     });
   }
 }
