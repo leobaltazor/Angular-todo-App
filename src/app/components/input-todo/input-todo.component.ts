@@ -38,7 +38,7 @@ export class InputTodoComponent implements OnInit {
         .subscribe((value: Todo) => {
           this.store.dispatch( new AddTodo({todo: value}));
         });
-        this.todoItem.reset();
+        this.todoItem.reset({isChecked: false});
     }
   }
 }

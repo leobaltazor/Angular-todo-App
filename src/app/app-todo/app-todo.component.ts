@@ -1,9 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ServiceTodoService } from "../service-todo.service";
 import { Store, select } from "@ngrx/store";
-import { TodoList } from "../store/models/todo-list.intarface";
-import { TodoActionTypes } from "../store/constants/todo.constants";
-import { AppStore } from "../store/models/app-store.interface";
 import * as selectorsTodo from "../store/selectors/todo.selectors";
 import { Todo } from "../store/models/todo.model";
 import TodoActions from "../store/actions";
@@ -15,7 +12,6 @@ import TodoActions from "../store/actions";
 })
 export class AppTodoComponent implements OnInit {
   todos: Todo[] = [];
-  selectedTodo: Todo[];
   newAddedItem: Todo;
   initialTodo: Todo[];
   lengthTodos = 0;
