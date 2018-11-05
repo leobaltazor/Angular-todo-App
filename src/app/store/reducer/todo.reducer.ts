@@ -1,8 +1,7 @@
 import { EntityState } from "@ngrx/entity";
-import { Todo } from "../models/todo.model";
-import { TodoActionTypes } from "../constants/todo.constants";
+import { Todo } from "../models";
+import { TodoActionTypes } from "../constants";
 import { TodoActions } from "../actions/todo.actions";
-import { AppStore } from "../models/app-store.interface";
 import { adapterTodo } from "../adapters";
 
 export interface State extends EntityState<Todo> {
