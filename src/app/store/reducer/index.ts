@@ -1,8 +1,5 @@
 import {
-  ActionReducer,
   ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
   MetaReducer
 } from "@ngrx/store";
 import { environment } from "../../../environments/environment";
@@ -12,14 +9,14 @@ import * as fromTodo from "./todo.reducer";
 
 export interface State {
   todos: fromTodo.State;
-  folder: fromFolder.State;
+  folders: fromFolder.State;
   selectedTodo: number | null;
   selectedFolder: number | null;
 }
 
 export const reducers: ActionReducerMap<State> = {
   todos: fromTodo.reducerTodo,
-  folder: fromFolder.reducerFolder,
+  folders: fromFolder.reducerFolder,
   selectedTodo: null,
   selectedFolder: null
 };
