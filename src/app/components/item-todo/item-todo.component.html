@@ -1,7 +1,9 @@
 <form [formGroup]="todoItem" class="d-flex justify-content-between align-items-center">
   <mat-checkbox formControlName="isChecked" color="primary" class="text-wrap">
-    {{todo.description}}
   </mat-checkbox>
+  <p class="pl-3 mb-0 mr-auto">
+    {{todo.description}}
+  </p>
   <button mat-icon-button (click)="onDeleteClick(todo)">
     <mat-icon>delete</mat-icon>
   </button>
