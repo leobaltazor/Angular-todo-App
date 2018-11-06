@@ -8,7 +8,6 @@ import {
   MatGridListModule,
   MatSidenavModule,
   MatInputModule,
-  MatListModule,
   MatDividerModule,
   MatCardModule,
   MatMenuModule,
