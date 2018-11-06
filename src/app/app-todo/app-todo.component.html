@@ -9,17 +9,14 @@
 </header>
 
 <div class="container content">
-  <div class="row justify-content-center">
-    <div class="col-md-6 mb-5 pt-5">
-      <app-input-todo class="example-form"></app-input-todo>
+  <div class="row pt-5">
+    <div class="col-4">
+      <app-list-folder></app-list-folder>
     </div>
-    <div class="col-12"></div>
-    <div class="col-md-6">
-      <app-sort-todo (_filter)="onFilter($event)" [length]="todos?.length"></app-sort-todo>
-    </div>
-    <div class="col-12"></div>
-    <div class="col-md-6">
-      <app-listtodos [todos]="todos" (todoStateChange)="onTodoStateChange($event)"></app-listtodos>
+    <div class="col-8">
+        <app-input-todo class="example-form"></app-input-todo>
+        <app-sort-todo (_filter)="onFilter($event)" [length]="todos?.length"></app-sort-todo>
+        <app-listtodos [todos]="todos" (todoStateChange)="onTodoStateChange($event)"></app-listtodos>
     </div>
   </div>
 </div>

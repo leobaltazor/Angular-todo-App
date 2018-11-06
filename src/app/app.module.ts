@@ -14,6 +14,7 @@ import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { reducers, metaReducers } from "./store/reducer";
 import { environment } from "../environments/environment";
+import { ListFolderComponent } from './components/list-folder/list-folder.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { environment } from "../environments/environment";
     InputTodoComponent,
     ItemTodoComponent,
     AppTodoComponent,
-    SortTodoComponent
+    SortTodoComponent,
+    ListFolderComponent
   ],
   imports: [
     BrowserModule,
