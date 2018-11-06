@@ -1,10 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { ServiceTodoService } from "../service-todo.service";
+import { ServiceService } from "../service.service";
 import { Store, select } from "@ngrx/store";
 import * as selectorsTodo from "../store/selectors/todo.selectors";
-import { Todo } from "../store/models";
+import { Folder, Todo } from "../store/models";
+import * as fromFoldersActions from "../store/actions/folder.actions";
 import * as fromTodosActions from "../store/actions/todo.actions";
 import { State } from "../store/reducer";
+import { selectFolderAll } from "../store/selectors/folder.selectors";
 
 @Component({
   selector: "app-todo",
@@ -16,9 +18,10 @@ export class AppTodoComponent implements OnInit {
   newAddedItem: Todo;
   initialTodo: Todo[];
   lengthTodos = 0;
+  folders: Folder[] = [];
 
   constructor(
-    private serviceTodoService: ServiceTodoService,
+    private serviceService: ServiceService,
     private store: Store<State>
   ) {}
 
@@ -53,14 +56,14 @@ export class AppTodoComponent implements OnInit {
   }
 
   onDelete(item: Todo): void {
-    this.serviceTodoService.deleteTodo("todos", +item.id).subscribe(_ => {
+    this.serviceService.deleteTodo("todos", +item.id).subscribe(_ => {
       const { id } = item;
       this.store.dispatch(new fromTodosActions.DeleteTodo({ id }));
     });
   }
 
   onCheck(itemId, payload): void {
-    this.serviceTodoService
+    this.serviceService
       .doneTodo("todos", itemId, payload)
       .subscribe(todo => {
         this.store.dispatch(new fromTodosActions.UpsertTodo({ todo }));
@@ -74,11 +77,23 @@ export class AppTodoComponent implements OnInit {
         this.todos = value;
         this.initialTodo = value;
       });
+    this.store.pipe(select(selectFolderAll)).subscribe((value: Folder[]) => {
+      this.folders = value;
+    });
+    this.getFolder();
     this.getTodo();
   }
 
+  getFolder(): void {
+    this.serviceService
+      .get("folders")
+      .subscribe((folders: Folder[]) => {
+        this.store.dispatch(new fromFoldersActions.LoadFolders({ folders }));
+      });
+  }
+
   getTodo(): void {
-    this.serviceTodoService.getTodo("todos").subscribe((todos: Todo[]) => {
+    this.serviceService.get("todos").subscribe((todos: Todo[]) => {
       this.store.dispatch(new fromTodosActions.LoadTodos({ todos }));
     });
   }

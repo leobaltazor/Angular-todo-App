@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
 import { debounceTime} from "rxjs/operators";
 import { Store } from "@ngrx/store";
-import { ServiceTodoService } from "../../service-todo.service";
+import { ServiceService } from "../../service.service";
 import { Todo } from "src/app/store/models/todo.model";
 import { AddTodo } from "src/app/store/actions/todo.actions";
 import { State } from "src/app/store/reducer";
@@ -18,11 +18,12 @@ export class InputTodoComponent implements OnInit {
       Validators.minLength(3),
       Validators.required
     ]),
-    isChecked: new FormControl(false)
+    isChecked: new FormControl(false),
+    folder: new FormArray([])
   });
   constructor(
     private store: Store<State>,
-    private serviceTodoService: ServiceTodoService
+    private serviceTodoService: ServiceService
   ) {}
 
   ngOnInit() {

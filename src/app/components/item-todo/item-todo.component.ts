@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
-import { Todo } from "src/app/store/models/todo.model";
+import { FormControl, FormGroup, FormArray } from "@angular/forms";
+import { Todo } from "../../store/models";
 
 @Component({
   selector: "app-item-todo",
@@ -13,15 +13,17 @@ export class ItemTodoComponent implements OnInit {
   todoItem = new FormGroup({
     id: new FormControl(""),
     description: new FormControl(""),
-    isChecked: new FormControl("")
+    isChecked: new FormControl(""),
   });
   @Output()
   todoStateChange: EventEmitter<Todo> = new EventEmitter();
 
-  constructor() {}
-
   ngOnInit() {
-    this.todoItem.setValue(this.todo);
+    this.todoItem.setValue({
+      id: this.todo.id,
+      description: this.todo.description,
+      isChecked: this.todo.isChecked
+    });
     this.todoItem.valueChanges.subscribe(value => {
       this.onCheckClick(value);
     });

@@ -3,7 +3,8 @@
     {
       "description": "test",
       "isChecked": true,
-      "id": 5
+      "id": 5,
+      "folder": ["1"]
     },
     {
       "description": "test1",
@@ -26,5 +27,14 @@
       "id": 10
     }
   ],
-  "folders": []
+  "folders": [
+    {
+      "id": "1",
+      "name": "folder 1"
+    },
+    {
+      "id": "2",
+      "name": "folder 2"
+    }
+  ]
 }

@@ -1,3 +1,5 @@
-<p>
-  list-folder works!
-</p>
+<mat-card *ngFor="let folder of folders" class="mb-3">
+  <mat-card-content>
+    {{folder.name}}
+  </mat-card-content>
+</mat-card>

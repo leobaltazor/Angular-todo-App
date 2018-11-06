@@ -5,6 +5,15 @@
         <input matInput placeholder="I am going to.. " formControlName="description">
       </mat-form-field>
     </div>
+    <div class="col">
+      <mat-form-field class="w-100">
+        <mat-select placeholder="Folders">
+          <mat-option *ngFor="let folder of folders" formControlName="folder">
+            {{folder.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div class="col-auto">
       <button mat-raised-button class="buttoninput" [disabled]="todoItem.invalid">
         <mat-icon>add</mat-icon>

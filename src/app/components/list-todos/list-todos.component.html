@@ -1,6 +1,5 @@
 <mat-card *ngFor="let todo of todos" class="mb-3">
-  <app-item-todo
-  [todo]="todo"
-  (todoStateChange)="onTodoStateChange($event)"
-  ></app-item-todo>
+  <mat-card-content>
+    <app-item-todo [todo]="todo" (todoStateChange)="onTodoStateChange($event)"></app-item-todo>
+  </mat-card-content>
 </mat-card>

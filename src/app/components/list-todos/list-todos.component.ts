@@ -11,6 +11,7 @@ export class ListTodosComponent implements OnInit {
   todos: Todo[];
   @Output()
   todoStateChange: EventEmitter<Todo> = new EventEmitter();
+
   constructor() {}
 
   ngOnInit() {}

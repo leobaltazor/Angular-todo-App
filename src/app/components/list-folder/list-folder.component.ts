@@ -1,4 +1,5 @@
-import {Component, OnInit} from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
+import { Folder } from "../../store/models";
 
 @Component({
   selector: "app-list-folder",
@@ -6,11 +7,9 @@ import {Component, OnInit} from "@angular/core";
   styleUrls: ["./list-folder.component.css"]
 })
 export class ListFolderComponent implements OnInit {
+  @Input()
+  folders: Folder[];
+  constructor() {}
 
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
