@@ -1,21 +1,22 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 import { Folder } from "../models/folder.model";
-import { FolderActions, FolderActionTypes } from "../actions/folder.actions";
+import { FolderActions } from "../actions/folder.actions";
+import { FolderActionTypes } from "../constants";
 
-export interface State extends EntityState<Folder> {
+export interface FolderState extends EntityState<Folder> {
   // additional entities state properties
 }
 
 export const adapterFolder: EntityAdapter<Folder> = createEntityAdapter<Folder>();
 
-export const initialState: State = adapterFolder.getInitialState({
+export const initialState: FolderState = adapterFolder.getInitialState({
   // additional entity state properties
 });
 
 export function reducerFolder(
   state = initialState,
   action: FolderActions
-): State {
+): FolderState {
   switch (action.type) {
     case FolderActionTypes.AddFolder: {
       return adapterFolder.addOne(action.payload.folder, state);

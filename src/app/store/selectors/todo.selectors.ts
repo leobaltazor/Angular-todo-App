@@ -4,11 +4,7 @@ import {
 } from "@ngrx/store";
 import * as todoReducer from "../reducer/todo.reducer";
 
-export interface State {
-  todos: todoReducer.State;
-}
-
-export const selectTodoState = createFeatureSelector<todoReducer.State>("todos");
+export const selectTodoState = createFeatureSelector<todoReducer.TodoState>("todos");
 
 export const selectTodoIds = createSelector(
   selectTodoState,
