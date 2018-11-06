@@ -5,7 +5,6 @@ import * as selectorsTodo from "../store/selectors/todo.selectors";
 import { Todo } from "../store/models";
 import * as fromTodosActions from "../store/actions/todo.actions";
 import { State } from "../store/reducer";
-import * as fromTodosReducer from "../store/reducer/todo.reducer";
 
 @Component({
   selector: "app-todo",
