@@ -16,7 +16,7 @@
     <div class="col-8">
         <app-input-todo class="example-form"></app-input-todo>
         <app-sort-todo (_filter)="onFilter($event)" [length]="todos?.length"></app-sort-todo>
-        <app-listtodos [todos]="todos" (todoStateChange)="onTodoStateChange($event)"></app-listtodos>
+        <app-list-todos [todos]="todos" (todoStateChange)="onTodoStateChange($event)"></app-list-todos>
     </div>
   </div>
 </div>

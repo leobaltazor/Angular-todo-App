@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 
 import { AppComponent } from "./app.component";
 import { CustomMaterialModule } from "./custom-material";
-import { ListtodosComponent } from "./components/listtodos/listtodos.component";
+import { ListTodosComponent } from "./components/list-todos/list-todos.component";
 import { HttpClientModule } from "@angular/common/http";
 import { InputTodoComponent } from "./components/input-todo/input-todo.component";
 import { ItemTodoComponent } from "./components/item-todo/item-todo.component";
@@ -14,12 +14,12 @@ import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { reducers, metaReducers } from "./store/reducer";
 import { environment } from "../environments/environment";
-import { ListFolderComponent } from './components/list-folder/list-folder.component';
+import { ListFolderComponent } from "./components/list-folder/list-folder.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListtodosComponent,
+    ListTodosComponent,
     InputTodoComponent,
     ItemTodoComponent,
     AppTodoComponent,

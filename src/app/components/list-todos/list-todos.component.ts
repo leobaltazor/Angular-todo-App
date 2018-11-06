@@ -2,11 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Todo } from "../../store/models";
 
 @Component({
-  selector: "app-listtodos",
-  templateUrl: "./listtodos.component.html",
-  styleUrls: ["./listtodos.component.css"]
+  selector: "app-list-todos",
+  templateUrl: "./list-todos.component.html",
+  styleUrls: ["./list-todos.component.css"]
 })
-export class ListtodosComponent implements OnInit {
+export class ListTodosComponent implements OnInit {
   @Input()
   todos: Todo[];
   @Output()
