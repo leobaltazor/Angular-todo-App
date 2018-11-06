@@ -11,9 +11,9 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AppTodoComponent } from "./app-todo/app-todo.component";
 import { SortTodoComponent } from "./components/sort-todo/sort-todo.component";
 import { StoreModule } from "@ngrx/store";
-import { environment } from "src/environments/environment";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
-import * as fromTodo from "./store/reducer/todo.reducer";
+import { reducers, metaReducers } from "./store/reducer";
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -29,12 +29,8 @@ import * as fromTodo from "./store/reducer/todo.reducer";
     CustomMaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
-    // StoreModule.forRoot({ todos: todoReducer }),
-    StoreModule.forRoot({todos: fromTodo.reducer}),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production // Restrict extension to log-only mode
-    })
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [],
   bootstrap: [AppComponent]

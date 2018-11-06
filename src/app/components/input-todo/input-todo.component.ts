@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { debounceTime} from "rxjs/operators";
 import { Store } from "@ngrx/store";
-import { TodoList } from "src/app/store/models/todo-list.intarface";
 import { ServiceTodoService } from "../../service-todo.service";
 import { Todo } from "src/app/store/models/todo.model";
 import { AddTodo } from "src/app/store/actions/todo.actions";
+import { State } from "src/app/store/reducer";
 
 @Component({
   selector: "app-input-todo",
@@ -21,7 +21,7 @@ export class InputTodoComponent implements OnInit {
     isChecked: new FormControl(false)
   });
   constructor(
-    private store: Store<TodoList>,
+    private store: Store<State>,
     private serviceTodoService: ServiceTodoService
   ) {}
 

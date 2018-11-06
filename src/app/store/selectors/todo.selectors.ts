@@ -1,33 +1,34 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { State } from "../reducer/todo.reducer";
-import adapterTodo from "../adapters";
+import {
+  createSelector,
+  createFeatureSelector,
+} from "@ngrx/store";
+import * as todoReducer from "../reducer/todo.reducer";
 
-export const selectTodosState = createFeatureSelector<State>("todos");
-
-export const getSelectedTodo = (state: State) => state.selectedTodo;
+export const selectTodoState = createFeatureSelector<todoReducer.TodoState>("todos");
 
 export const selectTodoIds = createSelector(
-  selectTodosState,
-  adapterTodo.selectTodoIds
+  selectTodoState,
+  todoReducer.selectTodoIds
 );
 export const selectTodoEntities = createSelector(
-  selectTodosState,
-  adapterTodo.selectTodoEntities
+  selectTodoState,
+  todoReducer.selectTodoEntities
 );
-export const selectAllTodos = createSelector(
-  selectTodosState,
-  adapterTodo.selectTodoAll
+export const selectTodoAll = createSelector(
+  selectTodoState,
+  todoReducer.selectTodoAll
 );
 export const selectTodoTotal = createSelector(
-  selectTodosState,
-  adapterTodo.selectTodoTotal
+  selectTodoState,
+  todoReducer.selectTodoTotal
 );
-export const selectCurrentTodoId = createSelector(
-  selectTodosState,
-  getSelectedTodo
-);
-export const selectCurrentUser = createSelector(
-  adapterTodo.selectTodoEntities,
-  selectCurrentTodoId,
-  (todoEntities, todoId) => todoEntities[todoId]
-);
+// export const getSelectedTodoId = createSelector(
+//   selectTodoState,
+//   todoReducer.getSelectedTodoId
+// );
+
+// export const selectCurrentTodo = createSelector(
+//   selectTodoState,
+//   getSelectedTodoId,
+//   (entities, id) => entities[id]
+// );
