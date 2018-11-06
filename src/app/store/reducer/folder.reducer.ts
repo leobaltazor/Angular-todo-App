@@ -5,12 +5,14 @@ import { FolderActionTypes } from "../constants";
 
 export interface FolderState extends EntityState<Folder> {
   // additional entities state properties
+  selectedFolderId: number | null;
 }
 
 export const adapterFolder: EntityAdapter<Folder> = createEntityAdapter<Folder>();
 
 export const initialState: FolderState = adapterFolder.getInitialState({
   // additional entity state properties
+  selectedFolderId: null
 });
 
 export function reducerFolder(

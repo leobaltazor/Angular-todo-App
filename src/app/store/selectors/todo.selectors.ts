@@ -6,6 +6,8 @@ import * as todoReducer from "../reducer/todo.reducer";
 
 export const selectTodoState = createFeatureSelector<todoReducer.TodoState>("todos");
 
+export const getSelectedTodoId = (state: todoReducer.TodoState) => state.selectedTodoId;
+
 export const selectTodoIds = createSelector(
   selectTodoState,
   todoReducer.selectTodoIds
@@ -22,13 +24,13 @@ export const selectTodoTotal = createSelector(
   selectTodoState,
   todoReducer.selectTodoTotal
 );
-// export const getSelectedTodoId = createSelector(
-//   selectTodoState,
-//   todoReducer.getSelectedTodoId
-// );
+export const selectCurrentTodoId  = createSelector(
+  selectTodoState,
+  getSelectedTodoId
+);
 
-// export const selectCurrentTodo = createSelector(
-//   selectTodoState,
-//   getSelectedTodoId,
-//   (entities, id) => entities[id]
-// );
+export const selectCurrentTodo = createSelector(
+  selectTodoState,
+  selectCurrentTodoId,
+  (entities, id) => entities[id]
+);

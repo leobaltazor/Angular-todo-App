@@ -10,15 +10,11 @@ import * as fromTodo from "./todo.reducer";
 export interface State {
   todos: fromTodo.TodoState;
   folders: fromFolder.FolderState;
-  selectedTodo: number | null;
-  selectedFolder: number | null;
 }
 
 export const reducers: ActionReducerMap<State> = {
   todos: fromTodo.reducerTodo,
   folders: fromFolder.reducerFolder,
-  selectedTodo: null,
-  selectedFolder: null
 };
 
 

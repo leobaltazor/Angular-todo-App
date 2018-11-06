@@ -4,6 +4,7 @@ import * as folderReducer from "../reducer/folder.reducer";
 export const selectTodoState = createFeatureSelector<folderReducer.FolderState>(
   "folders"
 );
+export const getSelectedFolderId = (state: folderReducer.FolderState) => state.selectedFolderId;
 
 export const selectFolderIds = createSelector(
   selectTodoState,
@@ -21,13 +22,13 @@ export const selectFolderTotal = createSelector(
   selectTodoState,
   folderReducer.selectFolderTotal
 );
-// export const getSelectedFolderId = createSelector(
-//   selectTodoState,
-//   folderReducer.getSelectedFolderId
-// );
+export const selectCurrentFolderId = createSelector(
+  selectTodoState,
+  getSelectedFolderId
+);
 
-// export const selectCurrentFolder = createSelector(
-//   selectTodoState,
-//   getSelectedFolderId,
-//   (entities, id) => entities[id]
-// );
+export const selectCurrentFolder = createSelector(
+  selectTodoState,
+  getSelectedFolderId,
+  (entities, id) => entities[id]
+);

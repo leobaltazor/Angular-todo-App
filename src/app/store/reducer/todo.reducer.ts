@@ -5,12 +5,14 @@ import { TodoActions } from "../actions/todo.actions";
 
 export interface TodoState extends EntityState<Todo> {
   // additional entities state properties
+  selectedTodoId: number | null;
 }
 
 export const adapterTodo: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
 export const initialState: TodoState = adapterTodo.getInitialState({
   // additional entity state properties
+  selectedTodoId: null,
 });
 
 export function reducerTodo(state = initialState, action: TodoActions): TodoState {
