@@ -8,8 +8,8 @@ import * as fromFolder from "./folder.reducer";
 import * as fromTodo from "./todo.reducer";
 
 export interface State {
-  todos: fromTodo.State;
-  folders: fromFolder.State;
+  todos: fromTodo.TodoState;
+  folders: fromFolder.FolderState;
   selectedTodo: number | null;
   selectedFolder: number | null;
 }

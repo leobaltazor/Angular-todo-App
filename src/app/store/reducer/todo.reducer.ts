@@ -3,17 +3,17 @@ import { Todo } from "../models";
 import { TodoActionTypes } from "../constants";
 import { TodoActions } from "../actions/todo.actions";
 
-export interface State extends EntityState<Todo> {
+export interface TodoState extends EntityState<Todo> {
   // additional entities state properties
 }
 
 export const adapterTodo: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
-export const initialState: State = adapterTodo.getInitialState({
+export const initialState: TodoState = adapterTodo.getInitialState({
   // additional entity state properties
 });
 
-export function reducerTodo(state = initialState, action: TodoActions): State {
+export function reducerTodo(state = initialState, action: TodoActions): TodoState {
   switch (action.type) {
     case TodoActionTypes.AddTodo: {
       return adapterTodo.addOne(action.payload.todo, state);
