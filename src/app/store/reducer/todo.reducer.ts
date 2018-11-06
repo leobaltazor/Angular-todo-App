@@ -1,21 +1,19 @@
-import { EntityState } from "@ngrx/entity";
+import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 import { Todo } from "../models";
 import { TodoActionTypes } from "../constants";
 import { TodoActions } from "../actions/todo.actions";
-import { adapterTodo } from "../adapters";
 
-export interface State extends EntityState<Todo> {
+export interface TodoState extends EntityState<Todo> {
   // additional entities state properties
-  selectedTodo: number | null;
-  selectedFolder: number | null;
 }
 
-export const initialState: State = adapterTodo.getInitialState({
-  selectedTodo: null,
-  selectedFolder: null
+export const adapterTodo: EntityAdapter<Todo> = createEntityAdapter<Todo>();
+
+export const initialState: TodoState = adapterTodo.getInitialState({
+  // additional entity state properties
 });
 
-export function reducer(state = initialState, action: TodoActions): State {
+export function reducerTodo(state = initialState, action: TodoActions): TodoState {
   switch (action.type) {
     case TodoActionTypes.AddTodo: {
       return adapterTodo.addOne(action.payload.todo, state);
@@ -54,11 +52,7 @@ export function reducer(state = initialState, action: TodoActions): State {
     }
 
     case TodoActionTypes.ClearTodos: {
-      return adapterTodo.removeAll({
-        ...state,
-        selectedTodo: null,
-        selectedFolder: null
-      });
+      return adapterTodo.removeAll(state);
     }
 
     default: {
@@ -66,3 +60,10 @@ export function reducer(state = initialState, action: TodoActions): State {
     }
   }
 }
+
+export const {
+  selectIds: selectTodoIds,
+  selectEntities: selectTodoEntities,
+  selectAll: selectTodoAll,
+  selectTotal: selectTodoTotal
+} = adapterTodo.getSelectors();
