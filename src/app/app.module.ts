@@ -9,7 +9,11 @@ import { InputTodoComponent } from "./components/input-todo/input-todo.component
 import { ItemTodoComponent } from "./components/item-todo/item-todo.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AppTodoComponent } from "./app-todo/app-todo.component";
-import { SortTodoComponent } from './components/sort-todo/sort-todo.component';
+import { SortTodoComponent } from "./components/sort-todo/sort-todo.component";
+import { StoreModule } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { reducers, metaReducers } from "./store/reducer";
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -24,7 +28,9 @@ import { SortTodoComponent } from './components/sort-todo/sort-todo.component';
     BrowserModule,
     CustomMaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [],
   bootstrap: [AppComponent]

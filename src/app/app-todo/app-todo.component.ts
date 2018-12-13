@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { Todo } from "../todo";
 import { ServiceTodoService } from "../service-todo.service";
+import { Store, select } from "@ngrx/store";
+import * as selectorsTodo from "../store/selectors/todo.selectors";
+import { Todo } from "../store/models";
+import * as fromTodosActions from "../store/actions/todo.actions";
+import { State } from "../store/reducer";
 
 @Component({
   selector: "app-todo",
@@ -9,23 +13,25 @@ import { ServiceTodoService } from "../service-todo.service";
 })
 export class AppTodoComponent implements OnInit {
   todos: Todo[] = [];
-  selectedTodo: Todo[];
   newAddedItem: Todo;
   initialTodo: Todo[];
   lengthTodos = 0;
 
-  constructor(private serviceTodoService: ServiceTodoService) {}
+  constructor(
+    private serviceTodoService: ServiceTodoService,
+    private store: Store<State>
+  ) {}
 
   onFilter(filter): void {
     switch (filter) {
       case "DONE":
         this.todos = this.initialTodo.filter((e, i, a) => {
-          return e.is_checked === true;
+          return e.isChecked === true;
         });
         break;
       case "ACTIVE":
         this.todos = this.initialTodo.filter((e, i, a) => {
-          return e.is_checked === false;
+          return e.isChecked === false;
         });
         break;
       default:
@@ -47,35 +53,33 @@ export class AppTodoComponent implements OnInit {
   }
 
   onDelete(item: Todo): void {
-    this.serviceTodoService.deleteTodo("todos", item.id).subscribe(res => {
-      this.todos = this.todos.filter(h => h.id !== item.id);
-      this.initialTodo = this.initialTodo.filter(h => h.id !== item.id);
-      console.log("Deleted", item);
+    this.serviceTodoService.deleteTodo("todos", +item.id).subscribe(_ => {
+      const { id } = item;
+      this.store.dispatch(new fromTodosActions.DeleteTodo({ id }));
     });
   }
 
   onCheck(itemId, payload): void {
     this.serviceTodoService
       .doneTodo("todos", itemId, payload)
-      .subscribe(res => {
-        console.log(res);
-        this.initialTodo = this.initialTodo.map((e, i, a) => {
-          return e.id === res.id ? res : e;
-        });
+      .subscribe(todo => {
+        this.store.dispatch(new fromTodosActions.UpsertTodo({ todo }));
       });
   }
 
-  onNewAddedItem(e) {
-    this.serviceTodoService.addTodo("todos", e as Todo).subscribe(res => {
-      this.todos.push(res);
-    });
+  ngOnInit() {
+    this.store
+      .pipe(select(selectorsTodo.selectTodoAll))
+      .subscribe((value: Todo[]) => {
+        this.todos = value;
+        this.initialTodo = value;
+      });
+    this.getTodo();
   }
 
-  ngOnInit() {
-    this.serviceTodoService.getTodo("todos").subscribe((res: Todo[]) => {
-      this.initialTodo = res;
-      this.todos = res;
+  getTodo(): void {
+    this.serviceTodoService.getTodo("todos").subscribe((todos: Todo[]) => {
+      this.store.dispatch(new fromTodosActions.LoadTodos({ todos }));
     });
   }
-  onSubmit(): void {}
 }

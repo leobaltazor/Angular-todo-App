@@ -1,7 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { Todo } from "../../todo";
-import { debounceTime, filter } from "rxjs/operators";
+import { debounceTime} from "rxjs/operators";
+import { Store } from "@ngrx/store";
+import { ServiceTodoService } from "../../service-todo.service";
+import { Todo } from "src/app/store/models/todo.model";
+import { AddTodo } from "src/app/store/actions/todo.actions";
+import { State } from "src/app/store/reducer";
 
 @Component({
   selector: "app-input-todo",
@@ -10,22 +14,30 @@ import { debounceTime, filter } from "rxjs/operators";
 })
 export class InputTodoComponent implements OnInit {
   todoItem = new FormGroup({
-    description: new FormControl("", [Validators.minLength(3), Validators.required]),
-    is_checked: new FormControl(false)
+    description: new FormControl("", [
+      Validators.minLength(3),
+      Validators.required
+    ]),
+    isChecked: new FormControl(false)
   });
-  @Output()
-  newAddedItem: EventEmitter<Todo> = new EventEmitter();
-  constructor() {}
+  constructor(
+    private store: Store<State>,
+    private serviceTodoService: ServiceTodoService
+  ) {}
 
   ngOnInit() {
-    this.todoItem.valueChanges.pipe(
-      debounceTime(500)
-    )
-    .subscribe(value => {
-      console.log(value);
+    this.todoItem.valueChanges.pipe(debounceTime(500)).subscribe(value => {
+      // console.log(value);
     });
   }
   onSubmit() {
-    this.newAddedItem.emit(this.todoItem.value as Todo);
+    if (this.todoItem.valid) {
+      this.serviceTodoService
+        .addTodo("todos", this.todoItem.value as Todo)
+        .subscribe((value: Todo) => {
+          this.store.dispatch( new AddTodo({todo: value}));
+        });
+        this.todoItem.reset({isChecked: false});
+    }
   }
 }
