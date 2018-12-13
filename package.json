@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "server": "json-server --watch db.json ",
-    "start:dev": "concurrently \"npm run start\" \"npm run server\" -n angular,server-json -k true"
+    "start:dev": "concurrently -p \"[{name}]\" -n \"angular,server-json\" -c \"bgRed.black,bgGreen.black\" -k true \"npm run start\" \"npm run server\""
   },
   "private": true,
   "dependencies": {
